@@ -4,10 +4,15 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,9 +26,11 @@ import com.md.producer.repository.EmployeeRepository;
 
 @RestController
 @RequestMapping("/employee")
+@CacheConfig(cacheNames= {"Employees"})
 public class EmployeeController {
 
 	@Autowired
+	@Resource
 	private EmployeeRepository empRepo;
 
 	@PostMapping
@@ -37,6 +44,13 @@ public class EmployeeController {
 	@ResponseStatus(HttpStatus.OK)
 	public List<Employee> getAllEmployee() {
 		return empRepo.findAll();
+	}
+	
+	@GetMapping("/{id}")
+	@Cacheable
+	@ResponseStatus(HttpStatus.OK)
+	public Optional<Employee> getAllEmployee(@PathVariable Integer id) {
+		return empRepo.findById(id);
 	}
 
 	@DeleteMapping
