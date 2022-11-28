@@ -6,11 +6,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
-
 @Document(collection = "employee")
 public class Employee implements Serializable{ 
-
-	private static final long serialVersionUID = 1L;
 
 	public Employee() {
 		super();
