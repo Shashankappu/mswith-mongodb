@@ -1,9 +1,12 @@
 package com.md.Client.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Employee {
 	private Integer id;
-	private String name;
-	private String salary;
 	public Integer getId() {
 		return id;
 	}
@@ -22,5 +25,6 @@ public class Employee {
 	public void setSalary(String salary) {
 		this.salary = salary;
 	}
-	
+	private String name;
+	private String salary;
 }
