@@ -1,34 +1,17 @@
 package com.md.producer.entity;
 
-import java.io.Serializable;
-
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 
-@Document(collection = "employee")
-public class Employee implements Serializable{ 
-
-	public Employee() {
-		super();
-	}
-
-	public Employee(Integer id, String name, double salary) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.salary = salary;
-	}
-
+@Document(indexName = "index1", createIndex=true)
+public class Employee{ 
+	
+	
 	@Id
 	private Integer id;
 	private String name;
 	private double salary;
-
-	@Override
-	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + ", salary=" + salary + "]";
-	} 
 	
 	public Integer getId() {
 		return id;
